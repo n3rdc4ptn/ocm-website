@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>/appendix/B on</title><link>https://symmetrical-broccoli-b4446266.pages.github.io/spec/appendix/b/appendix/b/</link><description>Recent content in /appendix/B on</description><generator>Hugo -- gohugo.io</generator><atom:link href="https://symmetrical-broccoli-b4446266.pages.github.io/spec/appendix/b/appendix/b/index.xml" rel="self" type="application/rss+xml"/><item><title>gitHub</title><link>https://symmetrical-broccoli-b4446266.pages.github.io/spec/appendix/B/gitHub/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://symmetrical-broccoli-b4446266.pages.github.io/spec/appendix/B/gitHub/</guid><description>gitHub and github — Accessing Git Commits on GitHub # Synopsis # type: gitHub/v1 Provided blobs use the following media type for: application/x-tgz
+The artefact content is provided as gnu-zipped tar archive
+Description # This method implements the access of the content of a git commit stored in a GitHub repository.
+Specification Versions # Supported specification version is v1
+Version v1 # The type specific specification fields are:
+repoUrl string</description></item><item><title>localBlob</title><link>https://symmetrical-broccoli-b4446266.pages.github.io/spec/appendix/B/localBlob/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://symmetrical-broccoli-b4446266.pages.github.io/spec/appendix/B/localBlob/</guid><description>localBlob — Repository Local Blob Access # Synopsis # type: localBlob/v1 Provided blobs use the following media type: attribute mediaType
+Description # This method is used to store a resource blob along with the component descriptor on behalf of the hosting OCM repository.
+Its implementation is specific to the implementation of OCM repository used to read the component descriptor. Every repository implementation may decide how and where local blobs are stored, but it MUST provide an implementation for this method.</description></item><item><title>ociArtefact</title><link>https://symmetrical-broccoli-b4446266.pages.github.io/spec/appendix/B/ociArtefact/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://symmetrical-broccoli-b4446266.pages.github.io/spec/appendix/B/ociArtefact/</guid><description>ociArtefact — OCI Artefact Access # Synopsis # type: ociArtefact/v1 Provided blobs use the following media type:
+application/vnd.oci.image.manifest.v1+tar+gzip: OCI image manifests application/vnd.oci.image.index.v1+tar.gzip: OCI index manifests Depending on the repository appropriate docker legacy types might be used.
+The artefact content is provided in the Artefact Set Format. The tag is provided as annotation.
+Description # This method implements the access of an OCI artefact stored in an OCI registry.
+Specification Versions # Supported specification version is v1</description></item><item><title>ociBlob</title><link>https://symmetrical-broccoli-b4446266.pages.github.io/spec/appendix/B/ociBlob/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://symmetrical-broccoli-b4446266.pages.github.io/spec/appendix/B/ociBlob/</guid><description>ociBlob — OCI Blob Access # Synopsis # type: ociBlob/v1 Provided blobs use the following media type: attribute mediaType
+Description # This method implements the access of an OCI blob stored in an OCI repository.
+Specification Versions # Supported specification version is v1
+Version v1 # The type specific specification fields are:
+imageReference string
+OCI repository reference (this artefact name used to store the blob).
+mediaType string
+The media type of the blob</description></item><item><title>s3</title><link>https://symmetrical-broccoli-b4446266.pages.github.io/spec/appendix/B/s3/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://symmetrical-broccoli-b4446266.pages.github.io/spec/appendix/B/s3/</guid><description>s3 — Blobs in a Simple Storage System (S3) # Synopsis # type: s3/v1 Provided blobs use the following media type: attribute mediaType
+Description # This method implements the access of a blob stored in an S3 bucket.
+Specification Versions # Supported specification version is v1
+Version v1 # The type specific specification fields are:
+region (optional) string
+OCI repository reference (this artefact name used to store the blob).
+bucket string</description></item></channel></rss>
