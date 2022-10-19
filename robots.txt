@@ -1,4 +1,4 @@
 User-agent: *
 Allow: /
 
-Sitemap: https://symmetrical-broccoli-b4446266.pages.github.io/sitemap.xml
+Sitemap: https://ocm.software/sitemap.xml
