@@ -17,7 +17,7 @@ version: v6.2.0
 type: ociImage
 relation: external
 access:
-  type: ociArtefact
+  type: ociArtifact
   imageReference: ghcr.io/stefanprodan/podinfo:6.2.0
 EOF
 </code></pre><p>With this file, we can use the ocm CLI to store the resource information in our component archive:</p><p><code>ocm add resource ./component-archive image_resource.yaml</code></p><p>Let&rsquo;s use the ocm CLI to verify that the resource has been successfully added:</p><pre><code class=language-shell>$ ocm get resources ./component-archive
@@ -48,6 +48,7 @@ spec:
         ports:
         - containerPort: 9898
           name: http
+EOF
 </code></pre><pre><code class=language-shell>cat &gt; deployment_resource.yaml &lt;&lt; EOF
 name: deployment
 version: v1.0.0
