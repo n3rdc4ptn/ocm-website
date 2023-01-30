@@ -300,7 +300,6 @@ spec:
         name: config
   snapshotTemplate:
     name: podinfo-deployment-localized
-    tag: latest
 EOF
 </code></pre><p>Commit, push and reconcile the <code>Localization</code> custom resource. Once it has done its thing, we should see two snapshots:</p><pre><code class=language-shell>$ kubectl get snapshots -n ocm-system
 
