@@ -234,7 +234,6 @@ spec:
     name: deployment
   snapshotTemplate:
     name: podinfo-deployment
-    tag: latest
 EOF
 </code></pre><p>Commit this file to git and follow the push and reconcile pattern seen previously.</p><p>If everything was write, the <code>ocm-controller</code>&rsquo;s log should have something along these lines:</p><pre><code class=language-log>1.6747462557628431e+09  INFO    resource-controller     successfully reconciled resource        {&quot;controller&quot;: &quot;resource&quot;, &quot;controllerGroup&quot;: &quot;delivery.ocm.software&quot;, &quot;controllerKind&quot;: &quot;Resource&quot;, &quot;Resource&quot;: {&quot;name&quot;:&quot;podinfo-deployment&quot;,&quot;namespace&quot;:&quot;ocm-system&quot;}, &quot;namespace&quot;: &quot;ocm-system&quot;, &quot;name&quot;: &quot;podinfo-deployment&quot;, &quot;reconcileID&quot;: &quot;930c97a5-7e8c-40f6-96ce-47dae431ed9f&quot;, &quot;name&quot;: &quot;podinfo-deployment&quot;}
 1.6747462557649686e+09  INFO    snapshot-reconcile      reconciling snapshot    {&quot;controller&quot;: &quot;snapshot&quot;, &quot;controllerGroup&quot;: &quot;delivery.ocm.software&quot;, &quot;controllerKind&quot;: &quot;Snapshot&quot;, &quot;Snapshot&quot;: {&quot;name&quot;:&quot;podinfo-deployment&quot;,&quot;namespace&quot;:&quot;ocm-system&quot;}, &quot;namespace&quot;: &quot;ocm-system&quot;, &quot;name&quot;: &quot;podinfo-deployment&quot;, &quot;reconcileID&quot;: &quot;ee0de303-0093-40f0-8c70-960c4dfdaef4&quot;}
@@ -300,8 +299,10 @@ spec:
         name: config
   snapshotTemplate:
     name: podinfo-deployment-localized
+    createFluxSource: true
 EOF
-</code></pre><p>Commit, push and reconcile the <code>Localization</code> custom resource. Once it has done its thing, we should see two snapshots:</p><pre><code class=language-shell>$ kubectl get snapshots -n ocm-system
+</code></pre><p><em>Note</em>: <code>createFluxSource</code> will automatically create a matching <code>OCIRepository</code> which Flux can automatically consume.
+To check if the <code>OCIRepository</code> has been created run <code>kubectl get ocirepositories -n A</code>.</p><p>Commit, push and reconcile the <code>Localization</code> custom resource. Once it has done its thing, we should see two snapshots:</p><pre><code class=language-shell>$ kubectl get snapshots -n ocm-system
 
 NAME                            AGE
 podinfo-deployment              5m20s
@@ -329,24 +330,8 @@ spec:
         ports:
         - containerPort: 9898
           name: http
-</code></pre><p><code>Localization</code> is the only transformation step we will perform in this simple scenario. For now let&rsquo;s move on and create a couple of Flux manifests so that we can apply the contents of our <code>Snapshot</code> to the cluster:</p><h3 id=consuming-snapshots-via-flux>Consuming <code>Snapshots</code> via Flux <a href=#consuming-snapshots-via-flux class=anchor aria-hidden=true>#</a></h3><p>We&rsquo;ll create a Flux <code>OCIRepository</code> in order to retrieve the snapshot from the in-cluster registry.</p><p>To fetch the URL for the OCI repository that the snapshot created, use this handy command:</p><pre><code class=language-shell>k get snapshot/podinfo-deployment-localized -n ocm-system -o jsonpath='{.status.repositoryURL}' | sed -E 's/http[s]?:\/\///' | sed 's/@.*//'
-registry.ocm-system.svc.cluster.local:5000/sha-15978287420042033189
-</code></pre><p>What this does is, it fetches the localized snapshot and gets the repository URL out without the blob ( the part after @ ) and without the <code>http://</code> at the begin ( since the protocol is <code>oci://</code> ).</p><p>We also need the tag that the localization snapshot reconciled its resource to:</p><pre><code class=language-shell>k get snapshot/podinfo-deployment-localized -n ocm-system -o jsonpath='{.status.tag}'
-27472
-</code></pre><pre><code class=language-shell>cat &gt; ./components/ocirepo.yaml &lt;&lt;EOF
-apiVersion: source.toolkit.fluxcd.io/v1beta2
-kind: OCIRepository
-metadata:
-  name: podinfo
-  namespace: flux-system
-spec:
-  interval: 1m0s
-  url: oci://registry.ocm-system.svc.cluster.local:5000/sha-15978287420042033189
-  insecure: true
-  ref:
-    tag: 27472
-EOF
-</code></pre><p>Then we will create a Flux <code>Kustomization</code> to apply the contents of the snapshot to the cluster:</p><pre><code class=language-shell>cat &gt; ./components/oci_kustomization.yaml &lt;&lt;EOF
+</code></pre><p><code>Localization</code> is the only transformation step we will perform in this simple scenario. For now let&rsquo;s move on and create a couple of Flux manifests so that we can apply the contents of our <code>Snapshot</code> to the cluster:</p><h3 id=consuming-snapshots-via-flux>Consuming <code>Snapshots</code> via Flux <a href=#consuming-snapshots-via-flux class=anchor aria-hidden=true>#</a></h3><p>Since, on the previous step, we used <code>createFluxSource</code> the <code>OCIRepository</code> object already exists. Now, we just have to
+create a <code>Kustomization</code> object to consume that repository.</p><pre><code class=language-shell>cat &gt; ./components/oci_kustomization.yaml &lt;&lt;EOF
 apiVersion: kustomize.toolkit.fluxcd.io/v1beta2
 kind: Kustomization
 metadata:
@@ -358,10 +343,10 @@ spec:
   targetNamespace: default
   sourceRef:
     kind: OCIRepository
-    name: podinfo
+    name: podinfo-deployment-localized
   path: ./
 EOF
-</code></pre><p>Now we commit these two files, push and wait for Flux to reconcile the localized podinfo application.</p><pre><code class=language-shell>git add ./components/ocirepo.yaml ./components/oci_kustomization.yaml
+</code></pre><p>Now we commit this file, push and wait for Flux to reconcile the localized podinfo application.</p><pre><code class=language-shell>git add ./components/oci_kustomization.yaml
 git commit -m &quot;add flux manifests to podinfo component&quot;
 git push
 
