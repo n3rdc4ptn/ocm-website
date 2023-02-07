@@ -41,7 +41,8 @@ localization:
     resource:
       name: image
 EOF
-</code></pre><p>Now, let&rsquo;s create the component archive that we will sign and transfer:</p><pre><code class=language-yaml>components:
+</code></pre><p>Now, let&rsquo;s create the component archive that we will sign and transfer:</p><pre><code class=language-shell>cat &gt; components.yaml &lt;&lt; EOF
+components:
 - name: github.com/acme/podinfo
   version: &quot;v1.0.0&quot;
   provider:
@@ -65,6 +66,7 @@ EOF
       access:
         type: ociArtifact
         imageReference: ghcr.io/stefanprodan/podinfo:6.2.0
+EOF
 </code></pre><p>This component definition contains three resources. The manifests folder which contains our <code>deployment.yaml</code> file. The
 ConfigData which we will use to configure the deployment. And the Image resource that we will use to replace the image
 with in our deployment.</p><p>Run the following to create our archive:</p><pre><code class=language-shell>ocm add componentversions --create --file ./component-archive components.yaml
@@ -81,7 +83,7 @@ NAME       VERSION IDENTITY TYPE      RELATION
 config     v1.0.0           PlainText local
 deployment v1.0.0           Directory local
 image      v6.2.0           ociImage  external
-</code></pre><p>We can also inspect the generated <code>component-descriptor.yaml</code> file:</p><pre><code>cat component-archive/blobs/sha256.1f4e9d5fb65d6e56bfb445b24abe91bebd593c880b986bca6715d0b4120bad54
+</code></pre><p>We can also inspect the generated <code>component-descriptor.yaml</code> file:</p><pre><code class=language-shell>cat component-archive/blobs/sha256.1f4e9d5fb65d6e56bfb445b24abe91bebd593c880b986bca6715d0b4120bad54
 component-descriptor.yaml0000000000000000000000000000151014163714600014267 0ustar0000000000000000component:
   componentReferences: []
   name: github.com/acme/podinfo
@@ -131,7 +133,7 @@ kubectl cluster-info --context kind-kind
 Not sure what to do next? 😅  Check out https://kind.sigs.k8s.io/docs/user/quick-start/
 </code></pre><p>The above command will create a cluster with the name <code>kind</code>. To see if it&rsquo;s up and running, execute:</p><pre><code>➜  kind get clusters
 kind
-</code></pre><h3 id=bootstrapping-flux>Bootstrapping Flux <a href=#bootstrapping-flux class=anchor aria-hidden=true>#</a></h3><p>Flux requires a git repository. Select a different folder and create an empty git repository with the following commands:</p><pre><code class=language-shell>git init
+</code></pre><h3 id=bootstrapping-flux>Bootstrapping Flux <a href=#bootstrapping-flux class=anchor aria-hidden=true>#</a></h3><p>Flux requires a git repository. <em>Select a different folder</em> and create an empty git repository with the following commands:</p><pre><code class=language-shell>git init
 # use gh to create and clone a fresh repository
 gh repo create podinfo-flux-repo --public --source=.
 mkdir -p ./clusters/kind &amp;&amp; touch ./clusters/kind/.keep
@@ -183,7 +185,7 @@ kubectl create secret generic -n ocm-system creds --from-literal=username=$GITHU
 # This must be executed in the folder in which this key is located in. Since this is the public key
 # it would also be safe to add it to the flux repository.
 kubectl create secret generic -n ocm-system alice-publickey --from-file=alice=rsa.pub
-</code></pre><blockquote><p><strong>note</strong> Currently we require OCI registry credentials to be configured twice, this is a known issue and will be resolved in a future update to the ocm-controller</p></blockquote><p>Choose a different folder and clone ocm-controller.</p><pre><code class=language-shell>gh repo clone open-component-model/ocm-controller
+</code></pre><blockquote><p><strong>note</strong> Currently we require OCI registry credentials to be configured twice, this is a known issue and will be resolved in a future update to the ocm-controller</p></blockquote><p>Choose a different folder and clone ocm-controller.</p><pre><code class=language-shell>gh repo clone git@github.com:open-component-model/ocm-controller.git
 cd ocm-controller
 make deploy
 </code></pre><h3 id=reconciling-components>Reconciling Components <a href=#reconciling-components class=anchor aria-hidden=true>#</a></h3><p>Next up we create a <code>ComponentVersion</code> custom resource to reconcile the component from the registry:</p><pre><code class=language-shell>cat &gt; ./components/componentversion.yaml &lt;&lt;EOF
