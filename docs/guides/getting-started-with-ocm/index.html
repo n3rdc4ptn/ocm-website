@@ -26,7 +26,12 @@ ORG=&quot;acme&quot;
 COMPONENT=&quot;github.com/${ORG}/helloworld&quot;
 VERSION=&quot;1.0.0&quot;
 CA_ARCHIVE=&quot;ca-hello-world&quot;
-</code></pre><p>If you specify values for your setup, you can directly use the commands shown in the next steps.</p><p>Let&rsquo;s asssume that we create a component based on a GitHub source repository.</p><h3 id=create-a-component-archive>Create a component archive <a href=#create-a-component-archive class=anchor aria-hidden=true>#</a></h3><p>First we create an empty component archive using the command <a href=https://github.com/open-component-model/ocm/blob/main/docs/reference/ocm_create_componentarchive.md><code>ocm create componentarchive</code></a>:</p><pre><code class=language-shell>ocm create componentarchive ${COMPONENT} ${VERSION}  --provider ${PROVIDER} --file $CA_ARCHIVE
+OCM_REPO=&quot;ghcr.io/&lt;github-org&gt;/ocm&quot;
+</code></pre><p>If you specify values for your setup, you can directly use the commands shown in the next steps.
+The variable <code>OCM_REPO</code> is set to a location of an OCI registry where artifacts and component
+descriptors are stored (omitting the <code>https://</code> prefix). For example
+<a href=https://github.com/features/packages>GitHub Packages</a> can be used as an OCI registry. Many other
+options exist.</p><p>Let&rsquo;s asssume that we create a component based on a GitHub source repository.</p><h3 id=create-a-component-archive>Create a component archive <a href=#create-a-component-archive class=anchor aria-hidden=true>#</a></h3><p>First we create an empty component archive using the command <a href=https://github.com/open-component-model/ocm/blob/main/docs/reference/ocm_create_componentarchive.md><code>ocm create componentarchive</code></a>:</p><pre><code class=language-shell>ocm create componentarchive ${COMPONENT} ${VERSION}  --provider ${PROVIDER} --file $CA_ARCHIVE
 </code></pre><details><summary>What happened?</summary><p>This command creates the following file structure:</p><pre><code class=language-bash>$ tree ca-hello-world
 ca-hello-world
 ├── blobs
