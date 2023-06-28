@@ -41,14 +41,14 @@ resources in the target repository.
 This behaviour can be further influenced by specifying a transfer script
 with the <code>script</code> option family.</p><p>If the <code>&ndash;uploader</code> option is specified, appropriate uploaders
 are configured for the transport target. It has the following format</p><center><pre>&lt;name>:&lt;artifact type>:&lt;media type>=&lt;yaml target config></pre></center><p>The uploader name may be a path expression with the following possibilities:</p><ul><li><code>ocm/ociRegistry</code>: oci Registry upload for local OCI artifact blobs.
-The media type is optional. If given ist must be an OCI artifact media type.</li><li><code>plugin/<plugin name>[/&lt;uploader name]</code>: uploader provided by plugin.</li></ul><p>It is possible to use a dedicated transfer script based on spiff.
+The media type is optional. If given it must be an OCI artifact media type.</li><li><code>plugin/<plugin name>[/&lt;uploader name]</code>: uploader provided by plugin.</li></ul><p>It is possible to use a dedicated transfer script based on spiff.
 The option <code>&ndash;scriptFile</code> can be used to specify this script
 by a file name. With <code>&ndash;script</code> it can be taken from the
 CLI config using an entry of the following format:</p><pre>
 type: scripts.ocm.config.ocm.software
 scripts:
-  &lt;name>: 
-    path: &lt;filepath> 
+  &lt;name>:
+    path: &lt;filepath>
     script:
       &lt;scriptdata>
 </pre><p>Only one of the fields <code>path</code> or <code>script</code> can be used.</p><p>If no script option is given and the cli config defines a script <code>default</code>
