@@ -8,4 +8,12 @@ string Component specifies the name of the ComponentVersion.
 version
 Version Version specifies the version information for the ComponentVersion.
 repository
-Repository Repository provides details about the OCI repository from which the component descriptor can be retrieved.</description></item></channel></rss>
+Repository Repository provides details about the OCI repository from which the component descriptor can be retrieved.</description></item><item><title>Replication Controller API v1</title><link>https://ocm.software/docs/controller-reference/api-reference/replication-controller/</link><pubDate>Mon, 10 Jul 2023 11:34:56 +0100</pubDate><guid>https://ocm.software/docs/controller-reference/api-reference/replication-controller/</guid><description>Packages:
+delivery.ocm.software/v1alpha1 delivery.ocm.software/v1alpha1 Package v1alpha1 contains API Schema definitions for the delivery v1alpha1 API group
+Resource Types: ComponentSubscription ComponentSubscription is the Schema for the componentsubscriptions API
+Field Description metadata
+Kubernetes meta/v1.ObjectMeta Refer to the Kubernetes API documentation for the fields of the metadata field. spec
+ComponentSubscriptionSpec component
+string Component specifies the name of the Component that should be replicated.
+semver
+string (Optional) Semver specifies an optional semver constraint that is used to evaluate the component versions that should be replicated.</description></item></channel></rss>
