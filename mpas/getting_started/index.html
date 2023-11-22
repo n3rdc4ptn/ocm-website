@@ -1,4 +1,4 @@
-<!doctype html><html lang=en-us><head><meta charset=utf-8><meta http-equiv=x-ua-compatible content="ie=edge"><meta name=viewport content="width=device-width,initial-scale=1,shrink-to-fit=no"><link rel=preconnect href=https://fonts.googleapis.com><link rel=preconnect href=https://fonts.gstatic.com crossorigin><link href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@300;400;500;600;700;800&display=swap" rel=stylesheet><script>(()=>{var t=window.matchMedia&&window.matchMedia("(prefers-color-scheme: dark)").matches,e=localStorage.getItem("theme");t&&e===null&&(localStorage.setItem("theme","dark"),document.documentElement.setAttribute("data-dark-mode","")),t&&e==="dark"&&document.documentElement.setAttribute("data-dark-mode",""),e==="dark"&&document.documentElement.setAttribute("data-dark-mode","")})()</script><link rel=stylesheet href=https://ocm.software/main.c777524c4c11cd027a29c0ad3769328a430587a7aa8b7534fbc8e2595dbfbe3da095dd4afdb0c0261b7897601e46adac3281a9727c7030cbf94ec7f67ceba04c.css integrity="sha512-x3dSTEwRzQJ6KcCtN2kyikMFh6eqi3U0+8jiWV2/vj2gld1K/bDAJht4l2AeRq2sMoGpcnxwMMv5Tsf2fOugTA==" crossorigin=anonymous><noscript><style>img.lazyload{display:none}</style></noscript><style>@import 'https://fonts.googleapis.com/css2?family=Open+Sans:wght@300;400;500;600;700;800&display=swap'</style><meta name=robots content="index, follow"><meta name=googlebot content="index, follow, max-snippet:-1, max-image-preview:large, max-video-preview:-1"><meta name=bingbot content="index, follow, max-snippet:-1, max-image-preview:large, max-video-preview:-1"><title>Get Started with MPAS | Open Component Model</title><meta name=description content="This tutorial shows you how to bootstrap MPAS to a Kubernetes cluster and deploy a simple application.
+<!doctype html><html lang=en-us><head><meta charset=utf-8><meta http-equiv=x-ua-compatible content="ie=edge"><meta name=viewport content="width=device-width,initial-scale=1,shrink-to-fit=no"><link rel=preconnect href=https://fonts.googleapis.com><link rel=preconnect href=https://fonts.gstatic.com crossorigin><link href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@300;400;500;600;700;800&display=swap" rel=stylesheet><script>(()=>{var t=window.matchMedia&&window.matchMedia("(prefers-color-scheme: dark)").matches,e=localStorage.getItem("theme");t&&e===null&&(localStorage.setItem("theme","dark"),document.documentElement.setAttribute("data-dark-mode","")),t&&e==="dark"&&document.documentElement.setAttribute("data-dark-mode",""),e==="dark"&&document.documentElement.setAttribute("data-dark-mode","")})()</script><link rel=stylesheet href=https://ocm.software/main.b8e4ee04872e04a9cffbaea2279bd3936a61c95d05086ab6a93e3c21217c7c468da4dca7602ddbed6c5a8ae537904366ac2ed1d5eff130b630c4fb4fb8fd94a7.css integrity="sha512-uOTuBIcuBKnP+66iJ5vTk2phyV0FCGq2qT48ISF8fEaNpNynYC3b7WxaiuU3kENmrC7R1e/xMLYwxPtPuP2Upw==" crossorigin=anonymous><noscript><style>img.lazyload{display:none}</style></noscript><style>@import 'https://fonts.googleapis.com/css2?family=Open+Sans:wght@300;400;500;600;700;800&display=swap'</style><meta name=robots content="index, follow"><meta name=googlebot content="index, follow, max-snippet:-1, max-image-preview:large, max-video-preview:-1"><meta name=bingbot content="index, follow, max-snippet:-1, max-image-preview:large, max-video-preview:-1"><title>Get Started with MPAS | Open Component Model</title><meta name=description content="This tutorial shows you how to bootstrap MPAS to a Kubernetes cluster and deploy a simple application.
 Prerequisites # A Kubernetes cluster A GitHub access token with repo scope kubectl Objectives # Bootstrap MPAS to a Kubernetes cluster Deploy a simple application Install the MPAS CLI # The MPAS CLI is the primary tool for interacting with MPAS. It can be used to bootstrap MPAS to a Kubernetes cluster.
 To install the MPAS CLI using brew:"><link rel=canonical href=https://ocm.software/mpas/getting_started/><meta property="og:locale" content="en_US"><meta property="og:type" content="article"><meta property="og:title" content="Get Started with MPAS"><meta property="og:description" content="This tutorial shows you how to bootstrap MPAS to a Kubernetes cluster and deploy a simple application.
 Prerequisites # A Kubernetes cluster A GitHub access token with repo scope kubectl Objectives # Bootstrap MPAS to a Kubernetes cluster Deploy a simple application Install the MPAS CLI # The MPAS CLI is the primary tool for interacting with MPAS. It can be used to bootstrap MPAS to a Kubernetes cluster.
@@ -11,8 +11,9 @@ To install the MPAS CLI using brew:"><meta property="og:url" content="https://oc
 a simple application.</p><h2 id=prerequisites>Prerequisites <a href=#prerequisites class=anchor aria-hidden=true>#</a></h2><ul><li>A Kubernetes cluster</li><li>A GitHub access token with <code>repo</code> scope</li><li>kubectl</li></ul><h2 id=objectives>Objectives <a href=#objectives class=anchor aria-hidden=true>#</a></h2><ul><li>Bootstrap MPAS to a Kubernetes cluster</li><li>Deploy a simple application</li></ul><h2 id=install-the-mpas-cli>Install the MPAS CLI <a href=#install-the-mpas-cli class=anchor aria-hidden=true>#</a></h2><p>The MPAS CLI is the primary tool for interacting with MPAS. It can be used to
 bootstrap MPAS to a Kubernetes cluster.</p><p>To install the MPAS CLI using <code>brew</code>:</p><pre><code class=language-bash>brew install open-component-model/tap/mpas
 </code></pre><p>For other installation methods, see the <a href=/mpas/overview/installation/>installation guide</a>.</p><h2 id=bootstrap-mpas>Bootstrap MPAS <a href=#bootstrap-mpas class=anchor aria-hidden=true>#</a></h2><h3 id=export-your-github-access-token>Export your GitHub access token <a href=#export-your-github-access-token class=anchor aria-hidden=true>#</a></h3><p>The MPAS CLI uses your GitHub access token to authenticate with GitHub. To create a
-GitHub access token, see the <a href=https://docs.github.com/en/github/authenticating-to-github/keeping-your-account-and-data-secure/creating-a-personal-access-token>GitHub documentation</a>.</p><pre><code class=language-bash>export GITHUB_TOKEN=&lt;your-github-access-token&gt;
+GitHub access token, see the <a href=https://docs.github.com/en/github/authenticating-to-github/keeping-your-account-and-data-secure/creating-a-personal-access-token>GitHub documentation</a>. In addition to that we need to export your GitHub user and an your email address as they are used later.</p><pre><code class=language-bash>export GITHUB_TOKEN=&lt;your-github-access-token&gt;
 export GITHUB_USER=&lt;your-username&gt;
+export MY_EMAIL=&lt;your-email-address&gt;
 </code></pre><h3 id=bootstrap-mpas-1>Bootstrap MPAS <a href=#bootstrap-mpas-1 class=anchor aria-hidden=true>#</a></h3><p>To bootstrap MPAS to your Kubernetes cluster, run the following command. If nothing is specified it will use the KUBECONFIG specified in the user&rsquo;s environment. It is also possible to specify a dedicated config using the &ndash;kubeconfig option.</p><pre><code class=language-bash>mpas bootstrap github \
   --owner=$GITHUB_USER \
   --repository=mpas-bootstrap \
@@ -70,9 +71,9 @@ create your project repository.</li></ol><pre><code class=language-bash>kubectl 
   --prune \
   --personal \
   --export  &gt;&gt; ./clusters/my-cluster/podinfo/project.yaml
-</code></pre><p>Then, apply the project to the cluster in a gitOps fashion:</p><pre><code class=language-bash>git add --all &amp;&amp; git commit -m &quot;Add podinfo project&quot; &amp;&amp; git push
-</code></pre><p><code>Flux</code> will detect the changes and apply the project to the cluster.</p><p>This will create in the cluster a <code>namespace</code> for the project, a <code>serviceaccount</code>, and RBAC.
-It will also create a GitHub repository for the project, and configure <code>Flux</code> to manage the project&rsquo;s resources.</p><ol start=3><li>Add the needed secrets to the namespace</li></ol><p><code>Flux</code> is used to deploy all workloads in a gitOps way. <code>Flux</code> needs a secret in
+</code></pre><p>Then, apply the project to the cluster in a GitOps fashion:</p><pre><code class=language-bash>git add --all &amp;&amp; git commit -m &quot;Add podinfo project&quot; &amp;&amp; git push
+</code></pre><p><code>Flux</code> will detect the changes and apply the project to the cluster.</p><p>This will create a <code>namespace</code> for the project, a <code>serviceaccount</code>, and RBAC in the cluster.
+It will also create a GitHub repository for the project, and configure <code>Flux</code> to manage the project&rsquo;s resources.</p><ol start=3><li>Add the needed secrets to the namespace</li></ol><p><code>Flux</code> is used to deploy all workloads in a GitOps way. <code>Flux</code> needs a secret in
 the project namespace that will be used to communicate with github:</p><pre><code class=language-bash>kubectl create secret generic \
   github-access \
   --from-literal=username=$GITHUB_USER \
@@ -81,12 +82,12 @@ the project namespace that will be used to communicate with github:</p><pre><cod
 </code></pre><p><strong>Note</strong> The credentials should have access to GitHub packages.</p><p>As part of step 2, a <code>serviceaccount</code> was created for the project. We will use this service account
 to provide the necessary permissions to pull from the <code>ghcr</code> registry.</p><p>First, create a secret containing the credentials for the service account:</p><pre><code class=language-bash>kubectl create secret docker-registry github-registry-key --docker-server=ghcr.io \
   --docker-username=$GITHUB_USER --docker-password=$GITHUB_TOKEN \
-  --docker-email=&lt;MY_EMAIL&gt; -n mpas-podinfo-application
+  --docker-email=$MY_EMAIL -n mpas-podinfo-application
 </code></pre><p>Then, patch the service account to use the secret:</p><pre><code class=language-bash>kubectl patch serviceaccount mpas-podinfo-application -p '{&quot;imagePullSecrets&quot;: [{&quot;name&quot;: &quot;github-registry-key&quot;}]}' \
   -n mpas-podinfo-application
 </code></pre><ol><li>Clone the project repository</li></ol><pre><code class=language-bash>git clone https://github.com/$GITHUB_USER/mpas-podinfo-application
 cd mpas-podinfo-application
-</code></pre><ol start=5><li>Add the podinfo component subscription</li></ol><p>Create a file under <code>./subscriptions/</code> that will contains the subscription declaration.</p><pre><code class=language-bash>mpas create cs podinfo-subscription \
+</code></pre><ol start=5><li>Add the podinfo <code>ComponentSubscription</code></li></ol><p>Create a file under <code>./subscriptions/</code> that will contain the subscription declaration.</p><pre><code class=language-bash>mpas create cs podinfo-subscription \
   --component=ocm.software/mpas/podinfo \
   --semver=&quot;&gt;=v1.0.0&quot; \
   --source-url=ghcr.io/open-component-model/mpas \
@@ -95,9 +96,9 @@ cd mpas-podinfo-application
   --target-secret-ref=github-access \
   --namespace=mpas-podinfo-application  \
   --export &gt;&gt; ./subscriptions/podinfo.yaml
-</code></pre><p>Then, apply the <code>ComponentSubscription</code> to the project in a gitOps fashion:</p><pre><code class=language-bash>git add --all &amp;&amp; git commit -m &quot;Add podinfo subscription&quot; &amp;&amp; git push
-</code></pre><p><code>Flux</code> will detect the changes and apply the subscription to the cluster.</p><p>This will replicate the product referenced by the <code>ComponentSubscription</code> <code>spec.component</code> field from
-defined registry in the <code>spec.source.url</code> to the <code>spec.destination.url</code> registry.</p><ol start=6><li>Add a target for the podinfo application</li></ol><p>The target will define where the application will be installed</p><pre><code class=language-bash>cat &lt;&lt;EOF &gt;&gt; ./targets/podinfo.yaml
+</code></pre><p>Then, apply the <code>ComponentSubscription</code> to the project in a GitOps fashion:</p><pre><code class=language-bash>git add --all &amp;&amp; git commit -m &quot;Add podinfo subscription&quot; &amp;&amp; git push
+</code></pre><p><code>Flux</code> will detect the changes and apply the subscription to the cluster.</p><p>This will replicate the product referenced by the field <code>spec.component</code> in the <code>ComponentSubscription</code> resource from
+the defined registry in <code>spec.source.url</code> to the <code>spec.destination.url</code> registry.</p><ol start=6><li>Add a <code>Target</code> for the podinfo application</li></ol><p>The target will define where the application will be installed</p><pre><code class=language-bash>cat &lt;&lt;EOF &gt;&gt; ./targets/podinfo.yaml
 apiVersion: mpas.ocm.software/v1alpha1
 kind: Target
 metadata:
@@ -115,10 +116,10 @@ spec:
       mpas.ocm.software/target-selector: podinfo-kubernetes-target
   interval: 5m0s
 EOF
-</code></pre><p>Then, apply the <code>Target</code> to the project in a gitOps fashion:</p><pre><code class=language-bash>git add --all &amp;&amp; git commit -m &quot;Add a target for podinfo&quot; &amp;&amp; git push
+</code></pre><p>Then, apply the <code>Target</code> to the project in a GitOps fashion:</p><pre><code class=language-bash>git add --all &amp;&amp; git commit -m &quot;Add a target for podinfo&quot; &amp;&amp; git push
 </code></pre><p><code>Flux</code> will detect the changes and apply the target to the cluster.</p><p>In order for the <code>Target</code> to reach a <code>Ready</code> state, the needed secrets should be created in the <code>podinfo</code> namespace.</p><p>First, create a secret containing the credentials for the service account:</p><pre><code class=language-bash>kubectl create secret docker-registry github-registry-key --docker-server=ghcr.io \
   --docker-username=$GITHUB_USER --docker-password=$GITHUB_TOKEN \
-  --docker-email=&lt;MY_EMAIL&gt; -n podinfo
+  --docker-email=$MY_EMAIL -n podinfo
 </code></pre><p>Then, add a label to allow the target to select it using the label selector:</p><pre><code class=language-bash>kubectl label secret github-registry-key mpas.ocm.software/target-selector=podinfo-kubernetes-target -n podinfo
 </code></pre><ol><li>Deploy the podinfo application</li></ol><p>In order to deploy the podinfo application, we need to create a <code>ProductDeploymentGenerator</code> resource:</p><pre><code class=language-bash>mpas create pdg podinfo \
   --service-account=mpas-podinfo-application \
@@ -126,7 +127,7 @@ EOF
   --subscription-namespace=mpas-podinfo-application  \
   --namespace=mpas-podinfo-application \
   --export &gt;&gt; ./generators/podinfo.yaml
-</code></pre><p>Then, apply the <code>ProductDeploymentGenerator</code> to the project in a gitOps fashion:</p><pre><code class=language-bash>git add --all &amp;&amp; git commit -m &quot;Add podinfo deployment generator&quot; &amp;&amp; git push
+</code></pre><p>Then, apply the <code>ProductDeploymentGenerator</code> to the project in a GitOps fashion:</p><pre><code class=language-bash>git add --all &amp;&amp; git commit -m &quot;Add podinfo deployment generator&quot; &amp;&amp; git push
 </code></pre><p><code>Flux</code> will detect the changes and apply the resource to the cluster.</p><p>This will create a pull request in the project repository with the <code>ProductDeployment</code> resource
 that will deploy the podinfo application.</p><p>Go to the project repository and retrieve the pull request.
 It should contain a <code>ProductDeployment</code> declaration that provides the configuration and
