@@ -23,7 +23,7 @@ curl -s https://ocm.software/install.sh | sudo bash
 
 #macos: use homebrew
 brew install open-component-model/tap/ocm
-</code></pre></li><li><p>Access to an OCM repository. This can be any OCI registry for which you have write permission (e.g. GitHub Packages). An OCM repository based on an OCI registry is identified by a leading OCI repository prefix. For example: <code>ghcr.io/&lt;YOUR-ORG>/ocm</code>.</p></li><li><p>Credentials for the CLI to access the OCM repository. The easiest way to do this is to reuse the Docker configuration.</p><p>To do this, create a file named <a href=.ocmconfig><code>.ocmconfig</code></a> in your home directory with the following:</p><pre><code class=language-yaml>type: generic.config.ocm.software/v1
+</code></pre></li><li><p>Access to an OCM repository. This can be any OCI registry for which you have write permission (e.g. GitHub Packages). An OCM repository based on an OCI registry is identified by a leading OCI repository prefix. For example: <code>ghcr.io/&lt;YOUR-ORG>/ocm</code>.</p></li><li><p>Credentials for the CLI to access the OCM repository. The easiest way to do this is to reuse the Docker configuration.</p><p>To do this, create a file named <code>.ocmconfig</code> in your home directory with the following content:</p><pre><code class=language-yaml>type: generic.config.ocm.software/v1
 configurations:
 - type: credentials.config.ocm.software
   repositories:
@@ -44,7 +44,7 @@ OCM_REPO=&quot;ghcr.io/&lt;github-org&gt;/ocm&quot;
 The variable <code>OCM_REPO</code> is set to a location of an OCI registry where artifacts and component
 descriptors are stored (omitting the <code>https://</code> prefix). For example
 <a href=https://github.com/features/packages>GitHub Packages</a> can be used as an OCI registry. Many other
-options exist.</p><p>Let&rsquo;s asssume that we create a component based on a GitHub source repository.</p><h3 id=create-a-component-archive>Create a component archive <a href=#create-a-component-archive class=anchor aria-hidden=true>#</a></h3><p>First we create an empty component archive using the command <a href=https://github.com/open-component-model/ocm/blob/main/docs/reference/ocm_create_componentarchive.md><code>ocm create componentarchive</code></a>:</p><pre><code class=language-shell>ocm create componentarchive ${COMPONENT} ${VERSION}  --provider ${PROVIDER} --file $CA_ARCHIVE
+options exist.</p><p>Let&rsquo;s asssume that we create a component based on a GitHub source repository.</p><h3 id=create-a-component-archive>Create a component archive <a href=#create-a-component-archive class=anchor aria-hidden=true>#</a></h3><p>First we create an empty component archive using the command <a href=https://github.com/open-component-model/ocm/blob/main/docs/reference/ocm_create_componentarchive.md><code>ocm create componentarchive</code></a></p><pre><code class=language-shell>ocm create componentarchive ${COMPONENT} ${VERSION}  --provider ${PROVIDER} --file $CA_ARCHIVE
 </code></pre><details><summary>What happened?</summary><p>This command creates the following file structure:</p><pre><code class=language-bash>$ tree ca-hello-world
 ca-hello-world
 ├── blobs
