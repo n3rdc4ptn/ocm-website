@@ -49,7 +49,7 @@ options exist.</p><p>Let&rsquo;s asssume that we create a component based on a G
 ca-hello-world
 ├── blobs
 └── component-descriptor.yaml
-</code></pre><p>The <a href=../../specification/elements/README.md#component-descriptor>component descriptor</a>
+</code></pre><p>The <a href=%5B../../specification/elements/README.md#component-descriptor%5D(https://github.com/open-component-model/ocm-spec/blob/main/doc/01-model/01-model.md#components-and-component-versions)>component descriptor</a>
 is stored as a yaml file named <code>component-descriptor.yaml</code>. It describes the content of a component version.</p><p>It contains the following configuration:</p><pre><code class=language-yaml>meta:
   schemaVersion: v2
 component:
@@ -90,8 +90,8 @@ component:
   sources: []
   componentReferences: []
 </code></pre><p>Because we use content from the local environment, it is directly packaged into the component archive
-using the <a href=https://github.com/open-component-model/ocm-spec/blob/main/doc/specification/elements/README.md#artifact-access>access method</a> of type
-<a href=https://github.com/open-component-model/ocm-spec/blob/main/doc/appendix/B/localBlob.md><code>local</code></a>.</p></details><h3 id=add-an-image-reference>Add an image reference <a href=#add-an-image-reference class=anchor aria-hidden=true>#</a></h3><p>Next, we will add an image. The image is already stored in an image registry (e.g. by a previous Docker build/push).</p><pre><code class=language-shell>ocm add resource $CA_ARCHIVE --type ociImage --name image --version ${VERSION} --accessType ociArtifact --reference gcr.io/google_containers/echoserver:1.10
+using the <a href=https://github.com/open-component-model/ocm-spec/blob/main/doc/04-extensions/02-access-types/README.md>access method</a> of type
+<a href=https://github.com/open-component-model/ocm-spec/blob/main/doc/04-extensions/02-access-types/localblob.md><code>localBlob</code></a>.</p></details><h3 id=add-an-image-reference>Add an image reference <a href=#add-an-image-reference class=anchor aria-hidden=true>#</a></h3><p>Next, we will add an image. The image is already stored in an image registry (e.g. by a previous Docker build/push).</p><pre><code class=language-shell>ocm add resource $CA_ARCHIVE --type ociImage --name image --version ${VERSION} --accessType ociArtifact --reference gcr.io/google_containers/echoserver:1.10
 </code></pre><pre><code class=language-shell>processing resource (by options)...
   processing document 1...
     processing index 1
@@ -186,7 +186,7 @@ access:
   imageReference: gcr.io/google_containers/echoserver:1.10
 </code></pre><p>A resource is described either by its accesss information to a remote repository or by locally
 provided resources. For remote access the field <code>access</code> is used to describe the
-<a href=https://github.com/open-component-model/ocm-spec/blob/main/doc/appendix/B/README.md>access method</a>. The type field is used to specify the kind of access.
+<a href=https://github.com/open-component-model/ocm-spec/blob/main/doc/04-extensions/02-access-types/README.md>access method</a>. The type field is used to specify the kind of access.
 If the resource content should be taken from local resources with the field <code>input</code> is used to specify
 the access to local resources. In this case the resource content is directly put into the component
 archive. Like for the <code>access</code> attribute the kind of the input source is described by the field <code>type</code>.
