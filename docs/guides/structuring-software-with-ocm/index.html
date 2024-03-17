@@ -56,8 +56,8 @@ This can easily be achieved with the helm CLI:</p><pre><code>helm repo add &lt;r
 helm pull --destination &lt;target-dir&gt; &lt;repo-name/chart-name&gt;
 </code></pre><p>Example:</p><pre><code>helm repo add bitnami https://charts.bitnami.com/bitnami
 helm pull --destination . bitnami/mariadb
-</code></pre><p>The helm chart for mariadb is then stored in the current working directory as <code>mariadb:11.4.5.tgz</code> and can be referenced as path from there in the <code>components.yaml</code> file (see below).</p><p>The helm chart for the microblog application is our own and part of the source code. It is
-not downloaded from a public repository.</p><h3 id=input-specification>Input Specification <a href=#input-specification class=anchor aria-hidden=true>#</a></h3><p>The corresponding input file for building the component version (<code>components.yaml</code>) will then look like this:</p><pre><code class=language-yaml>components:
+</code></pre><p>The helm chart for mariadb is then stored in the current working directory as <code>mariadb:11.4.5.tgz</code> and can be referenced as path from there in the <code>component-constructor.yaml</code> file (see below).</p><p>The helm chart for the microblog application is our own and part of the source code. It is
+not downloaded from a public repository.</p><h3 id=input-specification>Input Specification <a href=#input-specification class=anchor aria-hidden=true>#</a></h3><p>The corresponding input file for building the component version (<code>component-constructor.yaml</code>) will then look like this:</p><pre><code class=language-yaml>components:
 # Deployable component: microblog-deployment
 # - contains application and references all runtime dependencies
 # - used as root component to deploy the complete application
@@ -172,7 +172,7 @@ templating to fill them with values. The templating mechanism is described
 <a href=../best-practices-with-ocm#templating-the-resources>here</a>. For this example
 we use the simple (default) template engine type <code>subst</code>.</p><p>Note the differences between the various components:</p><ul><li>The microblog-deployment is the root and contains only references to other components</li><li>The microblog application is the main application, built from sources. It has <code>sources</code>.</li><li>The microblog application consists of an image and a helm chart. The image is built in
 previous build step (not described here) and taken from the local docker registry. The
-two images for different architectures are converted to a multi-arch image.</li><li>All other components are third-party components and referenced from public registries.</li></ul><h3 id=building-the-common-transport-archive>Building the Common Transport Archive <a href=#building-the-common-transport-archive class=anchor aria-hidden=true>#</a></h3><p>From the input file <code>components.yaml</code> the common transport archive can be created with the
+two images for different architectures are converted to a multi-arch image.</li><li>All other components are third-party components and referenced from public registries.</li></ul><h3 id=building-the-common-transport-archive>Building the Common Transport Archive <a href=#building-the-common-transport-archive class=anchor aria-hidden=true>#</a></h3><p>From the input file <code>component-constructor.yaml</code> the common transport archive can be created with the
 OCM CLI. For all variables we need to provide values. Variable values can be passed in the
 command line or stored in a file. For many variable having a values file is more convenient.
 The corresponding file <code>settings.yaml</code> may look like this:</p><pre><code class=language-yaml>VERSION: 0.23.1
@@ -185,7 +185,7 @@ MARIADB_VERSION: 10.6.11
 MARIADB_CHART_VERSION: 11.4.2
 NGINX_VERSION: 1.5.1
 NGINX_CHART_VERSION: 4.4.2
-</code></pre><p>Create the transport archive then with:</p><pre><code class=language-shell>ocm add componentversions --create --file &lt;ctf-target-dir&gt; --settings settings.yaml components.yaml
+</code></pre><p>Create the transport archive then with:</p><pre><code class=language-shell>ocm add componentversions --create --file &lt;ctf-target-dir&gt; --settings settings.yaml component-constructor.yaml
 </code></pre><p>You can view the generated component descriptor using the command:</p><pre><code class=language-shell>ocm get component -o yaml &lt;ctf-target-dir&gt;
 </code></pre><p>You can store the transport archive in an OCI registry (this step needs a proper
 configuration of credentials for the OCM CLI):</p><pre><code class=language-shell>ocm transfer ctf -f &lt;ctf-target-dir&gt; &lt;oci-repo-url&gt;

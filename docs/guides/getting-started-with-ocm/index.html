@@ -299,7 +299,7 @@ contains the list of component version artifacts to be transported.</p><pre><cod
 meta:
   schemaVersion: v2
 </code></pre><p>The other elements listed as <code>layers</code> describe the blobs for the local resources stored along with the component version. The digests can be seen in the <code>localReference</code> attributes of the component descriptor.</p></details><h3 id=all-in-one>All in One <a href=#all-in-one class=anchor aria-hidden=true>#</a></h3><p>The previous steps can be combined into a single operation working on a single description file:</p><ul><li>Creating a Common Transport Archive</li><li>Adding one or more components</li><li>With resources, sources and references</li></ul><p>The command <a href=https://github.com/open-component-model/ocm/blob/main/docs/reference/ocm_add_componentversions.md>ocm add componentversions</a>
-directly creates or extends a common transport archive without the need for creating dedicated component archives</p><p>Create a yaml configuration file <code>components.yaml</code>, which contains information about the components
+directly creates or extends a common transport archive without the need for creating dedicated component archives</p><p>Create a yaml configuration file <code>component-constructor.yaml</code>, which contains information about the components
 to create and the elements addded to those components</p><pre><code class=language-yaml>components:
 - name: github.com/acme.org/helloworld
   version: &quot;1.0.0&quot;
@@ -317,8 +317,8 @@ to create and the elements addded to those components</p><pre><code class=langua
       access:
         type: ociArtifact
         imageReference: gcr.io/google_containers/echoserver:1.10
-</code></pre><pre><code class=language-shell>ocm add componentversions --create --file ${CTF_ARCHIVE} components.yaml
-</code></pre><pre><code class=language-shell>processing components.yaml...
+</code></pre><pre><code class=language-shell>ocm add componentversions --create --file ${CTF_ARCHIVE} component-constructor.yaml
+</code></pre><pre><code class=language-shell>processing component-constructor.yaml...
   processing document 1...
     processing index 1
 found 1 component

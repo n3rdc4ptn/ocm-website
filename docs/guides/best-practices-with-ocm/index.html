@@ -516,7 +516,7 @@ NGINX_VERSION: 1.5.1
 NGINX_CHART_VERSION: 4.4.2
 </code></pre><p>auto generated from a build script:</p><pre><code class=language-yaml>VERSION: 0.23.1
 COMMIT: 5f03021059c7dbe760ac820a014a8a84166ef8b4
-</code></pre><pre><code class=language-shell>ocm add componentversions --create --file ../gen/ctf --settings ../gen/dynamic_settings.yaml --settings static_settings.yaml components.yaml
+</code></pre><pre><code class=language-shell>ocm add componentversions --create --file ../gen/ctf --settings ../gen/dynamic_settings.yaml --settings static_settings.yaml component-constructor.yaml
 </code></pre><h2 id=debugging-explain-the-blobs-directory>Debugging: Explain the blobs directory <a href=#debugging-explain-the-blobs-directory class=anchor aria-hidden=true>#</a></h2><p>For analysing and debugging the transport archive some commands can help to find what is contained in the archive and what is stored in which blob:</p><pre><code>tree ../gen/ctf
 ../gen/ctf
 ├── artifact-index.json
