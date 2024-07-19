@@ -125,7 +125,9 @@ local docker daemon.</p></li><li><p><strong><code>repository</code></strong> <em
 generated local artifact access. It is prefixed by the component name if
 it does not start with slash &ldquo;/&rdquo;.</p></li></ul><p>Options used to configure fields: <code>&ndash;hint</code>, <code>&ndash;inputPath</code></p></li><li><p>Input type <code>dockermulti</code></p><p>This input type describes the composition of a multi-platform OCI image.
 The various variants are taken from the local docker daemon. They should be
-<a href=https://github.com/open-component-model/ocm-website/blob/main/content/docs/tutorials/best-practices-with-ocm.md#building-multi-arch-images>built with the <code>buildx</code> command</a> for cross platform docker builds.</p><p>The denoted images, as well as the wrapping image index is packed as OCI
+<a href=https://github.com/open-component-model/ocm-website/blob/main/content/docs/tutorials/best-practices-with-ocm.md#building-multi-arch-images>built with the <code>buildx</code> command</a>
+for cross platform docker builds.
+The denoted images, as well as the wrapping image index is packed as OCI
 artifact set.
 They will contain an informational back link to the component version
 using the manifest annotation <code>software.ocm/component-version</code>.</p><p>This blob type specification supports the following fields:</p><ul><li><p><strong><code>variants</code></strong> <em>[]string</em></p><p>This REQUIRED property describes a set of image names to import from the
