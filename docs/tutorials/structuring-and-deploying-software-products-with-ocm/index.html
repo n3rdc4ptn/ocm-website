@@ -248,8 +248,6 @@ used by the OCM client or OCM controller to access this package in ghcr. To crea
 </span></span></span><span class=line><span class=cl><span class=w></span><span class=nt>spec</span><span class=p>:</span><span class=w>
 </span></span></span><span class=line><span class=cl><span class=w>  </span><span class=nt>component</span><span class=p>:</span><span class=w> </span><span class=l>ocm.software/podinfo</span><span class=w>
 </span></span></span><span class=line><span class=cl><span class=w>  </span><span class=nt>interval</span><span class=p>:</span><span class=w> </span><span class=l>10m0s</span><span class=w>
-</span></span></span><span class=line><span class=cl><span class=w>  </span><span class=nt>references</span><span class=p>:</span><span class=w>
-</span></span></span><span class=line><span class=cl><span class=w>    </span><span class=nt>expand</span><span class=p>:</span><span class=w> </span><span class=kc>true</span><span class=w>
 </span></span></span><span class=line><span class=cl><span class=w>  </span><span class=nt>repository</span><span class=p>:</span><span class=w>
 </span></span></span><span class=line><span class=cl><span class=w>    </span><span class=nt>url</span><span class=p>:</span><span class=w> </span><span class=l>&lt;your-location&gt;</span><span class=w> </span><span class=c># this is where you transferred the component to</span><span class=w>
 </span></span></span><span class=line><span class=cl><span class=w>    </span><span class=nt>secretRef</span><span class=p>:</span><span class=w>
@@ -264,8 +262,6 @@ other Kubernetes resources to consume. If everything was successful, we can insp
 </span></span></span><span class=line><span class=cl><span class=w></span><span class=nt>spec</span><span class=p>:</span><span class=w>
 </span></span></span><span class=line><span class=cl><span class=w>  </span><span class=nt>component</span><span class=p>:</span><span class=w> </span><span class=l>ocm.software/podinfo</span><span class=w>
 </span></span></span><span class=line><span class=cl><span class=w>  </span><span class=nt>interval</span><span class=p>:</span><span class=w> </span><span class=l>10m0s</span><span class=w>
-</span></span></span><span class=line><span class=cl><span class=w>  </span><span class=nt>references</span><span class=p>:</span><span class=w>
-</span></span></span><span class=line><span class=cl><span class=w>    </span><span class=nt>expand</span><span class=p>:</span><span class=w> </span><span class=kc>true</span><span class=w>
 </span></span></span><span class=line><span class=cl><span class=w>  </span><span class=nt>repository</span><span class=p>:</span><span class=w>
 </span></span></span><span class=line><span class=cl><span class=w>    </span><span class=nt>url</span><span class=p>:</span><span class=w> </span><span class=l>&lt;your-location&gt;</span><span class=w>
 </span></span></span><span class=line><span class=cl><span class=w>  </span><span class=nt>serviceAccountName</span><span class=p>:</span><span class=w> </span><span class=l>admin-account</span><span class=w>
@@ -640,8 +636,7 @@ This controller will contain information about reconciled objects. A Kustomizati
 GitRepository or an OCIRepository. In this case, the source will be an OCIRepositoy. That repository is pointing to
 the in-cluster OCI repository. A snapshot creates these entries and that&rsquo;s where it loads the data from.</p><p>The <strong>helm-controller</strong> and <strong>notification-controller</strong> aren&rsquo;t relevant.</p><h3 id=object-statuses>Object statuses<a href=#object-statuses class=anchor aria-hidden=true>#</a></h3><p><strong>ComponentVersion</strong>:</p><p>The <code>ComponentVersion</code> object contains information about what components have been reconciled. We talked about that
 earlier at <a href=#componentversion>Component Version</a>. The <code>Status</code> section contains any errors that could have
-occurred when reconciling information. If you find that the references section is empty, your component version is missing
-<code>expand: true</code> setting.</p><p><strong>ComponentDescriptor</strong>:</p><p>The <code>ComponentDescriptor</code> holds information about each component and their resources. Read more at <a href=#componentdescriptor>ComponentDescriptors</a>.</p><p>If the resources section is empty in the <code>status</code>, there is something wrong reconciling the individual items.</p><p><strong>Localization</strong>:</p><p>The status section contains information about the snapshot that this object created. The snapshot is used to point
+occurred when reconciling information.</p><p><strong>ComponentDescriptor</strong>:</p><p>The <code>ComponentDescriptor</code> holds information about each component and their resources. Read more at <a href=#componentdescriptor>ComponentDescriptors</a>.</p><p>If the resources section is empty in the <code>status</code>, there is something wrong reconciling the individual items.</p><p><strong>Localization</strong>:</p><p>The status section contains information about the snapshot that this object created. The snapshot is used to point
 to the right repository in the internal OCI cache. It also contains the last applied version. The conditions
 section will contain any errors while reconciling the resource.</p><p><strong>Configuration</strong>:</p><p>The status section contains information about the snapshot that this object created. The snapshot is used to point
 to the right repository in the internal OCI cache. It also contains the last applied version. The conditions
